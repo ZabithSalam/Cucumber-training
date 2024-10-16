@@ -5,6 +5,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.abiSystems.BaseClass;
+import org.abiSystems.PageObjects.HomePage;
+import org.abiSystems.PageObjects.LoginPage;
 import org.abiSystems.Utils.PropertiesUtill;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,25 +15,24 @@ import java.util.Properties;
 
 public class LoginStepDefs extends BaseClass {
 
-    Properties properties = PropertiesUtill.loadApplicationProperties();
+    Properties properties = PropertiesUtill.loadUserProperties();
 
     @Given("user enters valid username in username field")
     public void userUserEntersValidUsernameInUsernameField() {
-
-        String username= properties.get("username").toString();
-        driver.findElement(By.xpath("//form/div[1]/input")).sendKeys(username);
+        String username = properties.get("username").toString();
+        LoginPage.enterUsername(username);
     }
 
     @And("user enters valid password in the password field")
     public void userEntersValidPasswordInThePasswordField() {
-        String passwword= properties.get("password").toString();
-        driver.findElement(By.xpath("//form/div[2]/input")).sendKeys(passwword);
+        String password = properties.get("password").toString();
+        LoginPage.enterPassword(password);
 
     }
 
     @When("user clicks on the login button")
     public void userClicksOnTheLoginButton() {
-        driver.findElement(By.xpath("//input[@value='Login']")).click();
+        LoginPage.clickLogin();
 
     }
 
